@@ -86,6 +86,7 @@ class Connective(object):
     def atoms(self):
         return self.p.atoms + self.q.atoms
 
+
 class And(Term, Connective):
     def evaluate(self, **context):
         return self.p.evaluate(**context) and self.q.evaluate(**context)
@@ -108,3 +109,11 @@ class Implies(Term, Connective):
 
     def __repr__(self):
         return "(%s => %s)" % (self.p, self.q)
+
+
+class Iff(Term, Connective):
+    def evaluate(self, **context):
+        return self.p.evaluate(**context) == self.q.evaluate(**context)
+
+    def __repr__(self):
+        return "(%s <=> %s)" % (self.p, self.q)
